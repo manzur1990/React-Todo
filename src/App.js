@@ -2,21 +2,23 @@ import React from 'react';
 import TodoForm from './components/TodoForm';
 import TodoList from './components/TodoList';
 import './components/Todo.css'
+// import Search from './components/Search';
 
 const todo = [
-
   {
-    task: 'Container',
+    task: 'make your bed',
     id: 1,
     completed: false
   },
 
 ]
+
 class App extends React.Component {
   constructor() {
     super();
     this.state = {
       todo: todo,
+
     };
   }
 
@@ -45,23 +47,33 @@ class App extends React.Component {
       })
     })
   }
-
-  deleteItem = (id) => {
-    console.log(id)
+  clearComplete = (e) => {
+    e.preventDefault()
+    const todo = this.state.todo.filter(todo => !todo.completed)
+    this.setState({ todo })
   }
+
+
 
   render() {
     return (
       <div>
-        <h2>Gardening To Do List</h2>
+        <h2>To Do List</h2>
+        {/* <input
+          className="search-bar"
+          type="search"
+          name="searchbar"
+          placeholder="Serach Task"
+        /> */}
+        {/* <Search /> */}
         <TodoForm
-          deleteItem={this.deleteItem}
+          taskSearch={this.taskSearch}
+          clearComplete={this.clearComplete}
           addTask={this.addTask}
         />
         <TodoList
           toggleTask={this.toggleTask}
           todo={this.state.todo}
-
         />
       </div>
     );

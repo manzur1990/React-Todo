@@ -1,20 +1,20 @@
 import React, { Component } from 'react'
 
 export default class TodoForm extends Component {
-  
-   constructor() {
-       super()
-       this.state ={
-           item: ""
-       }
-   }
 
-   handleChanges = e => {
+  constructor(props) {
+    super(props)
+    this.state = {
+      item: ""
+    }
+  }
+
+  handleChanges = e => {
     this.setState({
       item: e.target.value
     });
   };
-   
+
   handleSubmit = e => {
     e.preventDefault();
     this.props.addTask(this.state.item);
@@ -22,20 +22,22 @@ export default class TodoForm extends Component {
       item: ""
     });
   };
-    render() {
-        return (
-            <div>
-                <form action=""  onSubmit={this.handleSubmit}>
-                    <input 
-                    type="text"
-                    name="item"
-                    value={this.state.item}
-                    onChange={this.handleChanges}
-                    />
-                    <button>Add Todo</button>
-                    <button onClick={()=>this.props.deleteItem}>Clear Completed</button>
-                </form>
-            </div>
-        )
-    }
+
+  render() {
+
+    return (
+      <div className="form-container">
+        <form action=""  >
+          <input
+            type="text"
+            name="item"
+            value={this.state.item}
+            onChange={this.handleChanges}
+          />
+          <button onClick={this.handleSubmit}>Add Task</button>
+          <button onClick={this.props.clearComplete}>Clear Completed</button>
+        </form>
+      </div>
+    )
+  }
 }
